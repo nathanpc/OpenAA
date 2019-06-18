@@ -8,11 +8,11 @@ MKDIR = mkdir -p
 SRCDIR = src
 INCDIR = include
 BUILDDIR := build
-TARGET = $(PROJECT)
+TARGET = $(BUILDDIR)/bin/$(PROJECT)
 
 SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
-OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCEXT)=.o))
+OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/obj/%,$(SOURCES:.$(SRCEXT)=.o))
 
 CFLAGS = -Wall -I $(INCDIR)
 LDFLAGS = -lportaudio
@@ -22,9 +22,13 @@ all: $(TARGET)
 $(TARGET): $(OBJECTS)
 	$(CC) $(CFLAGS) $(OBJECTS) -o $@ $(LDFLAGS)
 
-$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCEXT)
-	@$(MKDIR) $(BUILDDIR)
+$(BUILDDIR)/obj/%.o: $(SRCDIR)/%.$(SRCEXT)
+	@$(MKDIR) $(BUILDDIR)/bin
+	@$(MKDIR) $(BUILDDIR)/obj
 	$(CC) $(CFLAGS) -c $< -o $@
+
+run: $(TARGET)
+	./$(TARGET)
 
 debug: CFLAGS += -g3 -DDEBUG
 debug: $(TARGET)
@@ -32,6 +36,5 @@ debug: $(TARGET)
 
 clean:
 	$(RM) -r $(BUILDDIR)
-	$(RM) $(TARGET)
 	$(RM) valgrind.log
 
