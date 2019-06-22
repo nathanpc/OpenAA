@@ -9,7 +9,7 @@
 #include <iostream>
 #include <portaudio.h>
 
-//#include "Device/DeviceList.h"
+#include "Device/DeviceList.h"
 #include "Device/AudioDevice.h"
 
 using namespace std;
@@ -37,19 +37,13 @@ int main(int argc, char **argv) {
 	// Print some PortAudio information.
 	cout << Pa_GetVersionText() << endl;
 	
-	// Get number of devices available.
-	int dev_count = Pa_GetDeviceCount();
-	if (dev_count < 0) {
-		pa_err = dev_count;
-		cout << "Unable to get the list of audio devices available: [" <<
-			pa_err << "] " << Pa_GetErrorText(pa_err) << endl;
-		return EXIT_FAILURE;
-	}
+	// Get available devices list.
+	DeviceList device_list;
 	
 	// Iterate over each device and get information about it.
-	for (int i = 0; i < dev_count; i++) {
+	for (size_t i = 0; i < device_list.size(); i++) {
 		// Get a new audio device.
-		AudioDevice device(i, Pa_GetDeviceInfo(i));
+		AudioDevice device = device_list.getDevice(i);
 		device.printInformation();
 	}
 	
