@@ -9,6 +9,8 @@
 #include <iostream>
 #include <portaudio.h>
 
+#include "Device/DeviceList.h"
+
 using namespace std;
 
 // Global variables.
