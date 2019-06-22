@@ -9,13 +9,11 @@
 #include <iostream>
 #include <portaudio.h>
 
+#include "AudioInterface.h"
 #include "Device/DeviceList.h"
 #include "Device/AudioDevice.h"
 
 using namespace std;
-
-// Global variables.
-PaError pa_err;
 
 /**
  * Main entry-point for the application.
@@ -25,17 +23,10 @@ PaError pa_err;
  * @return      Program return code.
  */
 int main(int argc, char **argv) {
-	// Initialize PortAudio.
-	cout << "Initializing PortAudio..." << endl;
-	pa_err = Pa_Initialize();
-	if (pa_err != paNoError) {
-		cout << "An error occurred when trying to initialize PortAudio: [" <<
-			pa_err << "] " << Pa_GetErrorText(pa_err) << endl;
-		return EXIT_FAILURE;
-	}
+	AudioInterface interface;
 	
-	// Print some PortAudio information.
-	cout << Pa_GetVersionText() << endl;
+	// Initialize PortAudio.
+	interface.initialize();
 	
 	// Get available devices list.
 	DeviceList device_list;
@@ -48,7 +39,7 @@ int main(int argc, char **argv) {
 	}
 	
 	// Terminate PortAudio.
-	Pa_Terminate();
+	interface.terminate();
 	
 	return 0;
 }
