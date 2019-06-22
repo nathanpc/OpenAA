@@ -15,7 +15,7 @@ SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/obj/%,$(SOURCES:.$(SRCEXT)=.o))
 
 CFLAGS = -Wall -I $(INCDIR)
-LDFLAGS = -lportaudio
+LDFLAGS = -lportaudio -lm -lfftw3
 
 all: $(TARGET)
 
