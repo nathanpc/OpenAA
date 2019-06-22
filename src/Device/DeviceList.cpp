@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <portaudio.h>
 
+#include "AudioInterface.h"
 #include "Device/AudioDevice.h"
 
 using namespace std;
@@ -29,15 +30,13 @@ DeviceList::DeviceList() {
  * Populates the internal device vector.
  */
 void DeviceList::populateDevices() {
-	PaError pa_err;
-	
 	// Get number of devices available.
 	int dev_count = Pa_GetDeviceCount();
 	if (dev_count < 0) {
-		pa_err = dev_count;
-		cout << "Unable to get the list of audio devices available: [" <<
-			pa_err << "] " << Pa_GetErrorText(pa_err) << endl;
-		exit(EXIT_FAILURE);
+		PaError err = dev_count;
+		
+		cout << "Unable to get the list of audio devices available: ";
+		AudioInterface::printError(err, true);
 	}
 
 	// Iterate over each device.

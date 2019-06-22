@@ -16,11 +16,11 @@ class AudioInterface {
 	AudioInterface();
 	
 	// Initialization and destruction.
-	void initialize();
-	void terminate();
+	static void initialize();
+	static void terminate();
 	
 	// Errors.
-	void printError(PaError err, bool do_exit);
+	static void printError(PaError err, bool do_exit);
 };
 
 #endif
