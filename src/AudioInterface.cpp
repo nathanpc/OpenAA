@@ -28,7 +28,7 @@ void AudioInterface::initialize() {
 	cout << "Initializing PortAudio..." << endl;
 	err = Pa_Initialize();
 	if (err != paNoError) {
-		cout << "An error occurred when trying to initialize PortAudio: ";
+		cerr << "An error occurred when trying to initialize PortAudio: ";
 		printError(err, true);
 	}
 	
@@ -53,7 +53,7 @@ void AudioInterface::terminate() {
  */
 void AudioInterface::printError(PaError err, bool do_exit) {
 	// Print error.
-	cout << "[" << err << "] " << Pa_GetErrorText(err) << endl;
+	cerr << "[" << err << "] " << Pa_GetErrorText(err) << endl;
 	
 	// Exit if required.
 	if (do_exit) {
