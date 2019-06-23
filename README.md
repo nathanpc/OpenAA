@@ -11,4 +11,4 @@ To compile this software you'll require the following third-party libraries:
 
 ## License
 
-This software is licensed under the [GPLv3 License](/LICENSE).
+This software is licensed under the [GPLv3](/LICENSE) license.
