@@ -27,6 +27,7 @@ $(BUILDDIR)/obj/%.o: $(SRCDIR)/%.$(SRCEXT)
 	@$(MKDIR) $(BUILDDIR)/obj
 	@$(MKDIR) $(BUILDDIR)/obj/Device
 	@$(MKDIR) $(BUILDDIR)/obj/Computation
+	@$(MKDIR) $(BUILDDIR)/obj/UI
 	$(CC) $(CFLAGS) -c $< -o $@
 
 run: $(TARGET)
