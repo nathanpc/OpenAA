@@ -8,6 +8,7 @@ To compile this software you'll require the following third-party libraries:
 
   - [PortAudio v19](http://portaudio.com/)
   - [FFTW3](http://www.fftw.org/)
+  - [wxWidgets v3 (GTK2)](https://www.wxwidgets.org/)
 
 ## License
 

@@ -14,8 +14,8 @@ SRCEXT := cpp
 SOURCES := $(shell find $(SRCDIR) -type f -name *.$(SRCEXT))
 OBJECTS := $(patsubst $(SRCDIR)/%,$(BUILDDIR)/obj/%,$(SOURCES:.$(SRCEXT)=.o))
 
-CFLAGS = -Wall -I $(INCDIR)
-LDFLAGS = -lportaudio -lm -lfftw3
+CFLAGS = -Wall -I $(INCDIR) $(shell wx-config --cxxflags)
+LDFLAGS = -lportaudio -lm -lfftw3 $(shell wx-config --libs)
 
 all: $(TARGET)
 
